@@ -38,7 +38,7 @@ SET(LINK_LIBS "")
 # To execlude whole directory from compilation add them (separated by space) in the below variable
 SET(EXECLUDE_DIRS "")
 # To execlude source files from compilation add them (separated by space) in the below variable
-SET(EXECLUDE_SRC_FILES "feature_tests.c ")
+SET(EXECLUDE_SRC_FILES "feature_tests.c genericInput.cpp")
 ###########################################################
 
 

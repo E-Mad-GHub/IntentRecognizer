@@ -20,8 +20,14 @@ public:
     // Constructor
     genericInput();
 
+    // Copy Constructor
+    genericInput(const genericInput<VALUE_TYPE>&);
+
+    // Move Constructor
+    genericInput(genericInput<VALUE_TYPE>&&);
+
     // Constructor
-    genericInput(VALUE_TYPE&&);
+    genericInput(const VALUE_TYPE&);
 
     // Destructor
     ~genericInput();
@@ -30,16 +36,18 @@ public:
     bool matches(const absInput*) const;
 
     // Value setter
-    bool setValue(const genericInput&);
-    
+    bool setValue(const VALUE_TYPE&);
+
     // Clear the value method
     bool clearValue();
 
 private:
 
     // Generic value type
-    VALUE_TYPE inputValue;
+    VALUE_TYPE *m_inputValuePtr;
 
 };
+
+#include "./../../src/genericInput/genericInput.cpp"
 
 #endif  /* STRING_INPUT_HEADER_H */
