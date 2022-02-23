@@ -5,24 +5,20 @@
 /*! \brief Output abstract class.
  *
  *  Output abstract class, used to define the
- *         methods of the children classes
+ *         methods of the input children classes
  * 
- *  @tparam VAL_TYPE, the value inside the class.
  */
-template<typename VAL_TYPE>
 class absInput
 {
 public:
-    virtual bool getValue(VAL_TYPE&) const = 0;
+    // Virtual Destructor for inheritance enabling
+    virtual ~absInput() = default;
 
-    virtual bool setValue(const VAL_TYPE&)  = 0;
+    // This API will be used by any user of the children of the input (Ex. rosetta)
+    virtual bool matches(const absInput*) const = 0;
 
-    virtual bool setValue(const VAL_TYPE&&) = 0;
-    
+    // Clear the value method
     virtual bool clearValue() = 0;
-
-private:
-    VAL_TYPE valueType;
 };
 
 #endif  /* ABS_INPUT_HEADER_H */

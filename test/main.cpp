@@ -2,6 +2,9 @@
 #include <unistd.h>
 #include <iostream>
 #include <utility>
+#include "genericInput.hpp"
+#include "behaviorOutput.hpp"
+#include "Executer.hpp"
 
 int main()
 {
