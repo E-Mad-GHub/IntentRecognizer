@@ -26,7 +26,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # USER CONFIGURATION SECTION ##############################
 ###########################################################
 # Give your application a name
-SET(APP_NAME "IRecog")
+SET(APP_NAME "RunTests")
 # Specify the source directory to start the file recursion from
 SET(SOURCES_PATH "${CMAKE_SOURCE_DIR}/../IntentRecognizer")
 # To add specific source files to the compilation add them (separated by space) in the below variable
