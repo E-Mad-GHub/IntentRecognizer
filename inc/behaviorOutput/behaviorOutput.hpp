@@ -4,7 +4,7 @@
 
 #include "absOutput.hpp"
 
-typedef void (*execFunction)(void);
+typedef bool (*execFunction)(void);
 
 class behaviorOutput : public absOutput
 {
@@ -28,7 +28,7 @@ public:
     bool clearValue();
 
 private:
-    execFunction reqBehavior;
+    execFunction m_behavior;
 
 };
 

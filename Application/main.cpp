@@ -6,41 +6,37 @@
 #include "behaviorOutput.hpp"
 #include "Executer.hpp"
 
+bool test1()
+{
+    std::cout << "TEST-1" << std::endl;   
+    return true;
+}
+
+bool test2()
+{
+    std::cout << "TEST-2" << std::endl;   
+    return true;
+}
+
 int main()
 {
     std::cout << "\n\n\n\nTEEEEEEEEEEEESSSSSSSSSSSSSSSSSSSSSSST" << std::endl;
 
-    genericInput<std::string> sIn("Hello_1");
+    behaviorOutput out1;
+    out1.setValue(test1);
 
-    std::string tmp = "Hello_1";
-    genericInput<std::string> sIn_1(tmp);
-    genericInput<std::string> sIn_11(sIn_1);
-    genericInput<std::string> sIn_12("IM");
+    behaviorOutput out2(nullptr);
 
-    genericInput<std::string> sIn_2("Hello_2");
-    genericInput<std::string> sIn_22(sIn_2);
+    bool t1 = out1.executeOutput();
+    std::cout << "TEST-1 output = " << t1 << std::endl;   
 
-    // sIn = std::move(sIn_1);
+    bool t2 = out2.executeOutput();
+    std::cout << "TEST-2 output = " << t2 << std::endl;   
 
-    bool match  = (sIn_1.matches(&sIn_2));
+    out1.clearValue();
 
-    std::cout << "1 matches 2 (0) -> " << (int)match << std::endl;
-
-    bool match2 = (sIn_2.matches(&sIn_22));
-
-    std::cout << "2 matches 22 (1) -> " << (int)match2 << std::endl;
-
-    sIn_2.setValue("Hello_3");
-
-    bool match3 = (sIn_2.matches(&sIn_22));
-
-    std::cout << "2 matches 22 (0) -> " << (int)match3 << std::endl;
-
-    sIn_1.clearValue();
-
-    bool match4  = (sIn_1.matches(&sIn));
-
-    std::cout << "1 matches 0 (0) -> " << (int)match4 << std::endl;
+    t1 = out1.executeOutput();
+    std::cout << "TEST-1 output = " << t1 << std::endl;   
 
     sleep(1);
     return 0;
