@@ -3,7 +3,8 @@
 
 #include "genericInput.hpp"
 
-TEST_CASE( "Testing generally the genericInput APIs", "[genericInput]" )
+// SCENARIO
+SCENARIO( "Testing generally the genericInput APIs", "[genericInput]" )
 {
     // Validate the constructors and the matches() then go further for the other APIs
     GIVEN("Constructors and matches() have no problems")
@@ -30,7 +31,7 @@ TEST_CASE( "Testing generally the genericInput APIs", "[genericInput]" )
         }
 
         // Validate the clearValue()
-        WHEN("Test clearValue()")
+        THEN("Test clearValue()")
         {
             Input_11.setValue("In_1");
             REQUIRE( Input_1.matches(&Input_11) ); 
