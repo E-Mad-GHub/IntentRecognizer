@@ -37,6 +37,10 @@ Executer::registerInToOut(fPair firstPair, nPairs... nextPairs)
         m_parserMap[firstPair.first] = firstPair.second;
         returnVal &= this->registerInToOut(std::forward<nPairs>(nextPairs)...);            
     }
+    else
+    {
+        returnVal = false;
+    }
 
     return returnVal;
 }
