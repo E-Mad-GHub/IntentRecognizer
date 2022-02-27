@@ -12,30 +12,74 @@ typedef std::pair<const absInput*,const absOutput*> customPair;
 class Executer
 {
 public:
-    // Constructor
+    /*! \brief Executer class constructor.
+    *
+    *  Constructor
+    * 
+    */
     Executer();
 
-    // Copy Constructor
+    /*! \brief Executer class constructor.
+    *
+    *  Copy Constructor
+    * 
+    */
     Executer(Executer& exec);
 
-    // Move Constructor
+    /*! \brief Executer class constructor.
+    *
+    *  Move Constructor
+    * 
+    */
     Executer(Executer&& exec);
 
-    // Destructor
+    /*! \brief Executer class destructor.
+    *
+    *  Destructor
+    * 
+    */
     ~Executer();
 
-    // Method to register inputs with outputs as pairs
+    /*! \brief registerInToOut(...).
+    *
+    *  Registers an input to an output
+    * 
+    *  @param variadic(firstPair, nextPairs) pairs of input and output pointer.
+    *  @return true if registration succeeded, false if else.
+    */  
     template <typename fPair, typename... nPairs>  
     typename std::enable_if<std::is_convertible<fPair, customPair>::type::value, bool>::type
     registerInToOut(fPair firstPair, nPairs... nextPairs);
 
-    // Method to register inputs with outputs individually
+    /*! \brief registerInToOut().
+    *
+    *  Registers an input to an output individually
+    * 
+    *  @param inputPtr input pointer.
+    *  @param outputPtr output pointer.
+    *
+    *  @return true if registration succeeded, false if else.
+    */
     bool registerInToOut(const absInput* inputPtr, const absOutput* outputPtr);
 
-    // Method to execute the output
+    /*! \brief executeOutput().
+    *
+    *  Executes a behavior that maps to the given input.
+    * 
+    *  @param inputPtr input pointer.
+    *
+    *  @return buffer the result of the executed function.
+    */
     bool executeOutput(const absInput* inputVariablePtr) const;
 
-    // Method to check wether or not the input exists already in the executer
+    /*! \brief inputExists().
+    *
+    *  Checks whether or not the input existed already.
+    * 
+    *  @param inputPtr input pointer.
+    *
+    *  @return true if exists, false if else.
+    */
     bool inputExists(const absInput* inputVariablePtr) const;
 
 private:

@@ -17,28 +17,69 @@ class genericInput : public absInput
 {
 public:
 
-    // Constructor
+    /*! \brief genericInput class constructor.
+    *
+    *  Constructor
+    * 
+    */
     genericInput();
 
-    // Copy Constructor
+
+    /*! \brief genericInput class constructor.
+    *
+    *  Copy Constructor
+    * 
+    *  @param RHS the object which will be copied.
+    */
     genericInput(const genericInput<VALUE_TYPE>&);
 
-    // Move Constructor
+    /*! \brief genericInput class constructor.
+    *
+    *  Move Constructor
+    * 
+    *  @param RHS the object which will be moved.
+    */
     genericInput(genericInput<VALUE_TYPE>&&);
 
-    // Constructor
+    /*! \brief genericInput class constructor.
+    *
+    *  Custom Constructor
+    * 
+    *  @param passedValue the value of the input.
+    */
     genericInput(const VALUE_TYPE&);
 
-    // Destructor
+    /*! \brief genericInput class destructor.
+    *
+    *  Destructor
+    * 
+    */
     ~genericInput();
 
-    // Value match compare
+    /*! \brief matches() API
+    *
+    *  To compare two input in the matter of values.
+    * 
+    *  @param inputPtr the input to compare with.
+    *  @return true if matches, false if else
+    */
     bool matches(const absInput*) const;
 
-    // Value setter
+    /*! \brief setValue() API
+    *
+    *  Sets the value of the input
+    * 
+    *  @param inputPtr the input to compare with.
+    *  @return true if success, false if else
+    */
     bool setValue(const VALUE_TYPE&);
 
-    // Clear the value method
+    /*! \brief clearValue() API
+    *
+    *  Clears the value inside the class
+    * 
+    *  @return true if success, false if else
+    */
     bool clearValue();
 
 private:

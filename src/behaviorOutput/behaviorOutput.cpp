@@ -1,22 +1,43 @@
 
 #include "behaviorOutput.hpp"
 
-// Constructor
+/*! \brief behaviorOutput class constructor.
+*
+*  Constructor
+* 
+*/
 behaviorOutput::behaviorOutput()
 {
     m_behavior = nullptr;
 }
 
-// Constructor
+
+/*! \brief behaviorOutput class constructor.
+*
+*  Custom Constructor
+* 
+*  @param ptrToBehaviour the behavior to be saved.
+*/
 behaviorOutput::behaviorOutput(const execFunction ptrToBehaviour)
 {
     (void*)this->setValue(ptrToBehaviour);
 }
 
-// Destructor
+
+/*! \brief behaviorOutput class destructor.
+*
+*  Destructor (default)
+* 
+*/
 behaviorOutput::~behaviorOutput() = default;
 
-// Execute method, to execute the output behavior required
+
+/*! \brief executeOutput()
+*
+*  Execute method, to execute the output behavior required.
+* 
+*  @return buffer the execution function return
+*/
 bool behaviorOutput::executeOutput() const
 {
     bool returnVal = false;
@@ -29,7 +50,14 @@ bool behaviorOutput::executeOutput() const
     return returnVal;
 }
 
-// Sets the execution behavior
+
+/*! \brief setValue()
+*
+*  Sets the execution behavior.
+* 
+*  @param ptrToBehaviour pointer to function which will act as the behavior.
+*  @return true if saved successfully, false if else.
+*/
 bool behaviorOutput::setValue(const execFunction ptrToBehaviour)
 {
     bool returnVal = false;
@@ -43,7 +71,13 @@ bool behaviorOutput::setValue(const execFunction ptrToBehaviour)
     return returnVal;
 }
 
-// Clears the execution behavior
+
+/*! \brief clearValue()
+*
+*  Clears the execution behavior.
+* 
+*  @return true if clear successfully, false if else.
+*/
 bool behaviorOutput::clearValue()
 {
     // This return value of boolean is for other complex implementations other than that if needed
