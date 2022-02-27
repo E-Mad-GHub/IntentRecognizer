@@ -9,22 +9,53 @@ typedef bool (*execFunction)(void);
 class behaviorOutput : public absOutput
 {
 public:
-    // Constructor
+    /*! \brief behaviorOutput class constructor.
+    *
+    *  Constructor
+    * 
+    */
     behaviorOutput();
 
-    // Constructor
+    /*! \brief behaviorOutput class constructor.
+    *
+    *  Custom Constructor
+    * 
+    *  @param ptrToBehaviour the behavior to be saved.
+    */
     behaviorOutput(const execFunction);
 
-    // Destructor
+    /*! \brief behaviorOutput class destructor.
+    *
+    *  Destructor (default)
+    * 
+    */
     ~behaviorOutput();
 
-    // Execute method, to execute the output behavior required
+    /*! \brief executeOutput()
+    *
+    *  Execute method, to execute the output behavior required.
+    * 
+    *  @return buffer the execution function return
+    */
     bool executeOutput() const;
 
-    // Sets the execution behavior
+
+    /*! \brief setValue()
+    *
+    *  Sets the execution behavior.
+    * 
+    *  @param ptrToBehaviour pointer to function which will act as the behavior.
+    *  @return true if saved successfully, false if else.
+    */
     bool setValue(const execFunction);
 
-    // Clears the execution behavior
+    
+    /*! \brief clearValue()
+    *
+    *  Clears the execution behavior.
+    * 
+    *  @return true if clear successfully, false if else.
+    */
     bool clearValue();
 
 private:
