@@ -2,79 +2,47 @@
 #include <unistd.h>
 #include <iostream>
 #include <utility>
-#include "genericInput.hpp"
-#include "behaviorOutput.hpp"
+#include <csignal>
+
 #include "Executer.hpp"
+#include "configHandler.hpp"
 
-bool test1()
-{
-    std::cout << "TEST-1" << std::endl;   
-    return true;
+void signalHandler( int signum ) {
+    exit(signum);
 }
 
-bool test2()
+int main(int argc, char *argv[])
 {
-    std::cout << "TEST-2" << std::endl;   
-    return true;
-}
+    signal(SIGINT, signalHandler);
 
-bool test3()
-{
-    std::cout << "TEST-3" << std::endl;   
-    return true;
-}
+    if((argc < 2) && (!argv[1]))
+    {
+        std::cout << "\n\n\n\nInvalid Input" << std::endl;
+        std::cout << "\nUsage Instruction:\n\tEx. IRecog <PATH/TO/FILE/config.ini>\n" << std::endl;
+        return 0;
+    }
 
+    std::cout << "\n\n\n\nWELCOME TO INTENT REGOCNITION\n\n\n" << std::endl;
 
-int main()
-{
-    std::cout << "\n\n\n\nTEEEEEEEEEEEESSSSSSSSSSSSSSSSSSSSSSST" << std::endl;
-
-    bool res = false;
-    bool err = false;
-    bool exists = false;
-   
-    genericInput<std::string> in1("no1"); 
-    behaviorOutput out1(test1);
-
-    genericInput<std::string> in2("no2"); 
-    behaviorOutput out2;
-
-    genericInput<std::string> in3("no3"); 
-    behaviorOutput out3(test3);
-
-    genericInput<std::string> in4("no4"); 
-
+    // Instantiate an executer
     Executer ex;
 
-    std::pair<const absInput*, const absOutput*> pr1;
-    std::pair<const absInput*, const absOutput*> pr2;
-    std::pair<const absInput*, const absOutput*> pr3;
+    // Parse the ini config file (Thats is customized for the application configuration)
+    configHandler cH(argv[1], ex);
 
-    pr1.first = &in1; 
-    pr1.second = &out1;
+    while(true)
+    {
+        std::string userInput;
+        std::cout << "\nWhat is in your mind: ";
+        getline (std::cin, userInput);
 
-    pr2.first = &in2; 
-    pr2.second = &out2;
+        genericInput<std::string> tmpInput(userInput);
 
-    pr3.first = &in3; 
-    pr3.second = &out3;
-
-    err = ex.registerInToOut(pr1, pr2, pr3);
-
-    std::cout << "err = " << (int)err << std::endl;
-
-    res = ex.executeOutput(&in1);
-    res = ex.executeOutput(&in2);
-    res = ex.executeOutput(&in3);
-    std::cout << "res = " << (int)res << std::endl;
-
-    exists = ex.inputExists(&in1);
-    std::cout << "exists = " << (int)exists << std::endl;
-
-    exists = ex.inputExists(&in4);
-    std::cout << "exists = " << (int)exists << std::endl;
-
-
+        if(!ex.executeOutput(&tmpInput))
+        {
+            std::cout << "\nINVALID\n";
+        }
+    }
 
     sleep(1);
     return 0;

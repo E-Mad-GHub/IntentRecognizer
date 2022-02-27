@@ -4,9 +4,11 @@
 #include <new>
 #include "genericInput.hpp"
 
-#include <iostream>
-
-// Constructor
+/*! \brief genericInput class constructor.
+*
+*  Constructor
+* 
+*/
 template <typename VALUE_TYPE>
 genericInput<VALUE_TYPE>::genericInput()
 {
@@ -14,7 +16,13 @@ genericInput<VALUE_TYPE>::genericInput()
     this->m_inputValuePtr = nullptr;
 }
 
-// Copy Constructor
+
+/*! \brief genericInput class constructor.
+*
+*  Copy Constructor
+* 
+*  @param RHS the object which will be copied.
+*/
 template <typename VALUE_TYPE>
 genericInput<VALUE_TYPE>::genericInput(const genericInput<VALUE_TYPE>& RHS)
 {
@@ -28,7 +36,13 @@ genericInput<VALUE_TYPE>::genericInput(const genericInput<VALUE_TYPE>& RHS)
     this->setValue(tmpValue);
 }
 
-// Move Constructor
+
+/*! \brief genericInput class constructor.
+*
+*  Move Constructor
+* 
+*  @param RHS the object which will be moved.
+*/
 template <typename VALUE_TYPE>
 genericInput<VALUE_TYPE>::genericInput(genericInput<VALUE_TYPE>&& RHS)
 {
@@ -39,7 +53,13 @@ genericInput<VALUE_TYPE>::genericInput(genericInput<VALUE_TYPE>&& RHS)
     RHS.m_inputValuePtr = nullptr;
 }
 
-// Constructor
+
+/*! \brief genericInput class constructor.
+*
+*  Custom Constructor
+* 
+*  @param passedValue the value of the input.
+*/
 template <typename VALUE_TYPE>
 genericInput<VALUE_TYPE>::genericInput(const VALUE_TYPE& passedValue)
 {
@@ -49,14 +69,26 @@ genericInput<VALUE_TYPE>::genericInput(const VALUE_TYPE& passedValue)
     this->setValue(passedValue);
 }
 
-// Destructor
+
+/*! \brief genericInput class destructor.
+*
+*  Destructor
+* 
+*/
 template <typename VALUE_TYPE>
 genericInput<VALUE_TYPE>::~genericInput()
 {
     this->clearValue();
 }
 
-// Value match compare
+
+/*! \brief matches() API
+*
+*  To compare two input in the matter of values.
+* 
+*  @param inputPtr the input to compare with.
+*  @return true if matches, false if else
+*/
 template <typename VALUE_TYPE>
 bool genericInput<VALUE_TYPE>::matches(const absInput* inputPtr) const
 {
@@ -74,21 +106,27 @@ bool genericInput<VALUE_TYPE>::matches(const absInput* inputPtr) const
     } 
     catch(const std::bad_typeid& e) 
     {
-
         returnVal = false;
     }
 
     return returnVal;
 }
 
-// Value setter
+
+/*! \brief setValue() API
+*
+*  Sets the value of the input
+* 
+*  @param inputPtr the input to compare with.
+*  @return true if success, false if else
+*/
 template <typename VALUE_TYPE>
 bool genericInput<VALUE_TYPE>::setValue(const VALUE_TYPE& inputValue)
 {
-    if (!this->m_inputValuePtr)
+    if (!(this->m_inputValuePtr))
     {
         try
-        {
+        {    
             this->m_inputValuePtr = new VALUE_TYPE;
         }
         catch (const std::bad_alloc& e)
@@ -102,8 +140,13 @@ bool genericInput<VALUE_TYPE>::setValue(const VALUE_TYPE& inputValue)
     return true;
 }
 
-// Clear the value method
-template <typename VALUE_TYPE>
+
+/*! \brief clearValue() API
+*
+*  Clears the value inside the class
+* 
+*  @return true if success, false if else
+*/template <typename VALUE_TYPE>
 bool genericInput<VALUE_TYPE>::clearValue()
 {
     if (this->m_inputValuePtr)
