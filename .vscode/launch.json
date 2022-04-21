@@ -1,0 +1,38 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Mine",
+            "type": "cppdbg",
+            "request": "launch",
+            "MIMode": "gdb",
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+
+
+            // The GDB debugger binary path
+            "miDebuggerPath": "/usr/bin/gdb",
+
+            // The binary to be debuged
+            "program": "${workspaceFolder}/build/IRecog",
+
+            // CMD arguments for the binary to be debugged
+            "args":["${workspaceFolder}/config/config.ini"],
+
+            // Is the interactive cmd is needed (true) or not (false)
+            "externalConsole": true,
+
+        }
+    ]
+}

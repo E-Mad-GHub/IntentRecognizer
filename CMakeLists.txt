@@ -39,6 +39,13 @@ SET(LINK_LIBS "")
 SET(EXECLUDE_DIRS "")
 # To execlude source files from compilation add them (separated by space) in the below variable
 SET(EXECLUDE_SRC_FILES "feature_tests.c genericInput.cpp Executer.cpp configHandler.cpp")
+# To compile the binary with optimizations(no debug symbols) or without optimizations(include debug symbols)
+# Options 
+#   Debug          : w/  debug symbols, w/o optimization
+#   Release        : w/o debug symbols, w/  optimization
+#   RelWithDebInfo : w/  debug symbols, w/  optimization
+#   MinSizeRel     : w/o debug symbols, w/  optimization, stripped binaries
+SET(CMAKE_BUILD_TYPE Debug)
 ###########################################################
 
 
