@@ -50,7 +50,7 @@ Executer::~Executer()
 */
 template <typename fPair, typename... nPairs>    
 typename std::enable_if<std::is_convertible<fPair, customPair>::type::value, bool>::type
-Executer::registerInToOut(fPair firstPair, nPairs... nextPairs)
+Executer::registerInToOut(std::shared_ptr<fPair> firstPair, std::shared_ptr<nPairs>... nextPairs)
 {
     bool returnVal = true;
 
@@ -76,7 +76,7 @@ Executer::registerInToOut(fPair firstPair, nPairs... nextPairs)
 *
 *  @return true if registration succeeded, false if else.
 */
-bool Executer::registerInToOut(const absInput* inputPtr, const absOutput* outputPtr)
+bool Executer::registerInToOut(const std::shared_ptr<absInput> inputPtr, const std::shared_ptr<absOutput> outputPtr)
 {
     bool returnVal = false;
     bool found = false;
@@ -112,7 +112,7 @@ bool Executer::registerInToOut(const absInput* inputPtr, const absOutput* output
 *
 *  @return buffer the result of the executed function.
 */
-bool Executer::executeOutput(const absInput* inputPtr) const
+bool Executer::executeOutput(const std::shared_ptr<absInput> inputPtr) const
 {
     bool returnVal = false;
 
@@ -138,7 +138,7 @@ bool Executer::executeOutput(const absInput* inputPtr) const
 *
 *  @return true if exists, false if else.
 */
-bool Executer::inputExists(const absInput* inputPtr) const
+bool Executer::inputExists(const std::shared_ptr<absInput> inputPtr) const
 {
     bool returnVal = false;
 

@@ -98,7 +98,7 @@ bool genericInput<VALUE_TYPE>::matches(const absInput* inputPtr) const
     {
         if((typeid(genericInput<VALUE_TYPE>)) == (typeid(*inputPtr)))
         {
-            if((this->m_inputValuePtr) && ((static_cast<const genericInput<VALUE_TYPE>*>(inputPtr))->m_inputValuePtr))
+            if((this->m_inputValuePtr) && ((static_cast<const genericInput<VALUE_TYPE>*>(inputPtr))->m_inputValuePtr.get()))
             {
                 returnVal = (*(this->m_inputValuePtr) == *((static_cast<const genericInput<VALUE_TYPE>*>(inputPtr))->m_inputValuePtr));
             }
@@ -127,7 +127,7 @@ bool genericInput<VALUE_TYPE>::setValue(const VALUE_TYPE& inputValue)
     {
         try
         {    
-            this->m_inputValuePtr = new VALUE_TYPE;
+            this->m_inputValuePtr = std::make_unique<VALUE_TYPE>();
         }
         catch (const std::bad_alloc& e)
         {
@@ -135,7 +135,7 @@ bool genericInput<VALUE_TYPE>::setValue(const VALUE_TYPE& inputValue)
         }
     }
 
-    *(this->m_inputValuePtr) = inputValue;
+    *(this->m_inputValuePtr.get()) = inputValue;
 
     return true;
 }
@@ -151,7 +151,6 @@ bool genericInput<VALUE_TYPE>::clearValue()
 {
     if (this->m_inputValuePtr)
     {
-        delete this->m_inputValuePtr;
-        this->m_inputValuePtr = nullptr;
+        this->m_inputValuePtr.reset();
     }
 }
