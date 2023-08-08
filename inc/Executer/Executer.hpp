@@ -7,7 +7,7 @@
 #include <utility>
 #include <unordered_map>
 
-typedef std::pair<const absInput*,const absOutput*> customPair;
+typedef std::pair<std::shared_ptr<const absInput>,std::shared_ptr<const absOutput>> customPair;
 
 class Executer
 {
@@ -49,7 +49,7 @@ public:
     */  
     template <typename fPair, typename... nPairs>  
     typename std::enable_if<std::is_convertible<fPair, customPair>::type::value, bool>::type
-    registerInToOut(fPair firstPair, nPairs... nextPairs);
+    registerInToOut(std::shared_ptr<fPair> firstPair, std::shared_ptr<nPairs>... nextPairs);
 
     /*! \brief registerInToOut().
     *
@@ -60,7 +60,7 @@ public:
     *
     *  @return true if registration succeeded, false if else.
     */
-    bool registerInToOut(const absInput* inputPtr, const absOutput* outputPtr);
+    bool registerInToOut(const std::shared_ptr<absInput> inputPtr, const std::shared_ptr<absOutput> outputPtr);
 
     /*! \brief executeOutput().
     *
@@ -70,7 +70,7 @@ public:
     *
     *  @return buffer the result of the executed function.
     */
-    bool executeOutput(const absInput* inputVariablePtr) const;
+    bool executeOutput(const std::shared_ptr<absInput> inputVariablePtr) const;
 
     /*! \brief inputExists().
     *
@@ -80,11 +80,11 @@ public:
     *
     *  @return true if exists, false if else.
     */
-    bool inputExists(const absInput* inputVariablePtr) const;
+    bool inputExists(const std::shared_ptr<absInput> inputVariablePtr) const;
 
 private:
     // Map which has the mapping between inputs and outputs
-    std::unordered_map<const absInput*, const absOutput*> m_parserMap;
+    std::unordered_map<std::shared_ptr<const absInput>, std::shared_ptr<const absOutput>> m_parserMap;
 
     // Private helper
     inline bool registerInToOut(){return true;}
